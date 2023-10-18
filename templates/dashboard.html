@@ -1,25 +1,162 @@
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* .card {
+            
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        } */
+
+        /* .card-body{
+            padding: 5px 10px;
+        } */
+
+        .card-container{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 100px;
+        }
+        .card{
+            width: 325px;
+            background-color: 45a049 ;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+            margin: 20px;
+        }
+        .card p{
+            
+
+        }
+
+        .table thead tr {
+            background-color: #4CAF50;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Welcome, {{ user.username }}!</h1>
     
-    <h2>Your Expenses:</h2>
-    <ul>
-        {% for expense in expenses %}
-            <li>Amount: ${{ expense.amount }} - category: {{ expense.category }}</li>
-        {% endfor %}
-    </ul>
+   
+    <!-- Add the image tag here -->
+    <div class="card-container">
+        <div class="card" >
+            <div class="card-body">
+                <h2>Total Expenses</h2>
+            
+                <p>Total Amount: ₹{{ total_expenses }}</p>
+            
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h2>Add New Expense:</h2>
+            
+                <form action="/user/{{ user.username }}/add_expense" method="post">
+                    <label for="amount">Amount:</label>
+                    <input type="text" id="amount" name="amount">
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category">
+                    <input type="submit" value="Add Expense">
+                </form>
+            
+            </div>
+        </div>
+    </div>
+    
 
-    <h2>Add New Expense:</h2>
-    <form action="/user/{{ user.username }}/add_expense" method="post">
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount"><br>
-        <label for="category">category:</label>
-        <input type="text" id="category" name="category"><br>
-        <input type="submit" value="Add Expense">
-    </form>
+
+
+   
+        
+    
+    
+
+        
+    <!-- Your existing code here -->
+    
+    <h2>Your Expenses:</h2>
+    
+
+ 
+      <table class="table table-hover">
+        <thead >
+            <tr>
+              <th scope="col">SL No.</th>
+              <th scope="col">Date</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Category</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% set count = namespace(value=0) %}
+              {% for expense in expenses %}
+            <tr>
+              {% set count.value = count.value + 1 %}
+              <td>{{ count.value }}</td>
+              <td>{{ expense.expense_date }}</td>
+              <td>₹{{ expense.amount }}</td>
+              <td>{{ expense.category }}</td>            
+            </tr>          
+            {% endfor %}
+            
+          </tbody>
+        </tbody>
+      </table>
+    
+  
+    
+    
 </body>
 </html>
+
+
+
+
+
+

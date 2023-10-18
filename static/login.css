@@ -21,10 +21,6 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
-   
-
-
     
 }
 
@@ -37,9 +33,9 @@
     font-weight: bold;
     margin-top: 10px;
 }
-
+.login-from input[type="email"],
 .login-from input[type="text"],
-.login-from input[type="password"] {
+.login-from input[type="password"]{
     padding: 10px;
     margin-top: 10px;
     border: 1px solid #ddd;
@@ -57,3 +53,12 @@
     margin-top: 20px;
 }
 
+.login-from p{
+  position: relative;
+  left: 25%;
+
+}
+
+.login-from p a{
+  text-decoration: none;
+}
